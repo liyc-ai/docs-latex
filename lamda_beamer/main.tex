@@ -93,7 +93,7 @@
 		% 	      \min_{r\in\mathcal{R}}\left(\max_\pi J_\pi[r + \mathcal{H}(\pi(\cdot|s))]\right) - J_{\pi_E}[r],
 		%       \]
 		%       where $\mathcal{H}(\pi(\cdot|s)) = \mathbb{E}_{a\sim\pi(\cdot|s)}[-\log(\pi(a|s))]$.
-		\item By selecting a proper regularizer on the learned reward function $r$, \citep{gail} associated the maximum entropy IRL problem with GAN, thus getting GAIL's objective:
+		\item By properly regularizing the learned reward function $r$, \citep{gail} associated the maximum entropy IRL problem with GAN, thus getting GAIL's objective:
 		      \[
 			      \min_\pi \max_D \mathbb{E}_{(s,a)\sim \rho^{\pi_E}}\left[\log\left(D(s,a)\right)\right] + \mathbb{E}_{(s,a)\sim \rho^{\pi}}\left[\log\left(1-D(s,a)\right)\right],
 		      \]
@@ -179,13 +179,13 @@
 			      Conclude the proof.
 		\end{enumerate}
 	\end{proof}
-	From Theorem \ref{thm:asaf}, we find that optimizing the inner $\tilde{\pi}$ will give us the optimal outer $\pi_G$. We thus get ASAF, a new imitation learning algorithm with pseudocode shown in Algorightm \ref{algo:asaf}.
+	From Theorem \ref{thm:asaf}, we find that optimizing the inner $\tilde{\pi}$ will give us the optimal outer $\pi_G$. We thus get ASAF, a new imitation learning algorithm with pseudocode shown in Algorithm \ref{algo:asaf}.
 
 	\begin{algorithm}[H]
 		\caption{ASAF}
 		\label{algo:asaf}
 		\begin{algorithmic}
-			\REQUIRE expert trajecotries $\mathcal{D}_E = \{\tau_i^{(E)}\}_{i=1}^{N_E}$
+			\REQUIRE expert trajectories $\mathcal{D}_E = \{\tau_i^{(E)}\}_{i=1}^{N_E}$
 			\STATE randomly initialize $\tilde{\pi}$ and set $\pi_G \gets \tilde{\pi}$
 			\FOR{steps $m=0$ to $M$}
 			\STATE Collect trajectories $\mathcal{D}_G = \{\tau_i^{(G)}\}^{N_G}_{i=1}$ using $\pi_G$
@@ -233,14 +233,14 @@
 		\[
 			D_{\tilde{\mathcal{P}}, \mathcal{P}_G}(\tau) = \frac{\tilde{\mathcal{P}}(s_0)\prod_{i=1}^{T-1}\tilde{\mathcal{P}}(a_t|s_t)}{\prod_{i=1}^{T-1}\tilde{\mathcal{P}}(a_t|s_t) + \prod_{i=1}^{T-1}\mathcal{P}_G(a_t|s_t)}.
 		\]
-		\item Reduction to transition-wise scenario: The author also discussed a novel transion-wise objective (connected to \citep{DBLP:journals/corr/abs-1710-11248}), which is only suit for discrete action space.
+		\item Reduction to transition-wise scenario: The author also discussed a novel transition-wise objective (connected to \citep{DBLP:journals/corr/abs-1710-11248}), which is only suit for discrete action space.
 		% \begin{itemize}
 		% 	\item Directly reduce \myeqref{equ:emp_d} into a transition-wise objective;
 		% 	\[
 		% 		D_{\tilde{\pi}, \pi_G}(s,a) = \frac{\tilde{\pi}}{\tilde{\pi}+\pi_G},
 		% 	\]
 		% 	$\Longrightarrow$ $\tilde{\pi}^* = \commentedbox{\frac{d^{\pi_E}(s)}{d^{\pi_G}(s)}}{\tiny We need other tools to estimate it} \times \pi_E \neq \pi_E$.
-		% 	\item The author also discussed a novel transion-wise objective (connected to \citep{DBLP:journals/corr/abs-1710-11248}), which is suit for discrete action space.
+		% 	\item The author also discussed a novel transition-wise objective (connected to \citep{DBLP:journals/corr/abs-1710-11248}), which is suit for discrete action space.
 		% \end{itemize}
 		\item We can use any policy to sample fake trajectories.
 	\end{itemize}

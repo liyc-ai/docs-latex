@@ -1,10 +1,20 @@
 # Beamer Template for LAMDA
 
-Modified from [NJUAI-Beamer Template](https://github.com/typoverflow/NJUAI-Beamer-Template)
+Modified from [NJUAI-Beamer Template](https://github.com/typoverflow/NJUAI-Beamer-Template). Please use `pdflatex` to build and compile your documents. 
+
+To support Chinese, please uncomment line 4-6, like below
+
+```tex
+% add Chinses support
+\usepackage[UTF8]{ctex}
+\ctexset{today=old}
+```
+
+Then use `xelatex` to build your `.tex` file.
 
 ## Latex-Workshop VSCode plugin (Optional)
 
-Please to [使用VSCode编写Latex](https://zhuanlan.zhihu.com/p/38178015) or [Latex-Workshop Wiki](https://github.com/James-Yu/LaTeX-Workshop/wiki).
+Please refer to [使用VSCode编写Latex](https://zhuanlan.zhihu.com/p/38178015) or [Latex-Workshop Wiki](https://github.com/James-Yu/LaTeX-Workshop/wiki).
 
 ## Format `.tex` File (Optional)
 
