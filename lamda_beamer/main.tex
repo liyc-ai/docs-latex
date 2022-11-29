@@ -15,6 +15,7 @@
 \usepackage{enumerate}
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\usepackage{physics}
 
 
 \title{Adversarial Soft Advantage Fitting: \\ Imitation Learning without Policy Optimization}
@@ -84,7 +85,7 @@
 		\item For any policy $\pi$, we define its occupancy measure $\rho^\pi: \mathcal{S} \times \mathcal{A} \to [0, 1]$ as
 		      \[
 			      \rho^\pi(s, a) 
-				  = \frac{1}{Z(\gamma, T)}\sum_{t=0}^{T-1} \gamma^t \left(\sum_{\tau:(s_t,a_t) = (s,a)} P_\pi(\tau)\right)
+				  = \frac{1}{Z(\gamma, T)}\sum_{t=0}^{T-1} \gamma^t \pqty{\sum_{\tau:(s_t,a_t) = (s,a)} P_\pi(\tau)}
 				  = \frac{1}{Z(\gamma, T)}\sum_{t=0}^{T-1} \gamma^t \Pr(s_t=s)\pi(a|s),
 		      \]
 		      where $Z(\gamma, T) = \sum_t^{T-1}\gamma^t$.
