@@ -132,9 +132,9 @@
 		D_{\tilde{\pi}, \pi_G}(x) = \frac{P_{\tilde{\pi}}(\tau)}{P_{\tilde{\pi}}(\tau) + P_{\pi_G}(\tau)} = \frac{q_{\tilde{\pi}}(\tau)}{q_{\tilde{\pi}}(\tau) + q_{\pi_G}(\tau)}.
 	\]
 	Here $q_\pi(\tau)=\prod_{t=0}^{T-1}\pi(a_t|s_t)$.
-	\begin{theorem}\label{thm:corp}
+	\begin{lemma}\label{lem:corp}
 		For any stationary policy $\pi$, there is an one-to-one correspondence between $\pi$ and $q_\pi$ on $\mathcal{M}$.
-	\end{theorem}
+	\end{lemma}
 	\begin{proof}
 		For any trajectory $\tau = (s_0, a_0, s_1, a_1, \ldots, s_{T-1}, a_{T-1}, s_T)$, we have that $P_\pi(\tau) = q_\pi \times \xi(\tau)$, with
 		\[\xi(\tau) := \mathcal{P}_0(s_0)\prod_{t=0}^{T-1}\mathcal{P}(s_{t+1}|s_t, a_t).\]
@@ -165,7 +165,7 @@
 			      \[
 				      D_{\tilde{\pi}, \pi_G}^* = \argmax_{D_{\tilde{\pi}, \pi_G}}L_i(\tau_i) = \frac{q_{\pi_E}(\tau_i)}{q_{\pi_E}(\tau_i) + q_{\pi_G}(\tau_i)}.
 			      \]
-			      Thus from the definition and monotonicity of $D_{\tilde{\pi}, \pi_G}^*$, we get $q_{\tilde{\pi}^*} = q_{\pi_E}$. Then by using Theorem \ref{thm:corp}, we conclude that $\tilde{\pi}^* = \pi_E$.
+			      Thus from the definition and monotonicity of $D_{\tilde{\pi}, \pi_G}^*$, we get $q_{\tilde{\pi}^*} = q_{\pi_E}$. Then by using Lemma \ref{lem:corp}, we conclude that $\tilde{\pi}^* = \pi_E$.
 			\item we use the conclusion from (a), and get
 			      \[
 				      \begin{aligned}
@@ -203,7 +203,9 @@
 		D_{\tilde{\pi}, \pi_G}(\tau) = \frac{\prod_{i=1}^{T-1}\tilde{\pi}(a_t|s_t)}{\prod_{i=1}^{T-1}\tilde{\pi}(a_t|s_t) + \prod_{i=1}^{T-1}\pi_G(a_t|s_t)}.
 	\end{equation}
 
-    {\bf Remark}: ASAF uses the full-length trajectory, which may be sample-inefficient. The authors also considered using a window size of $w$ or even transition-wise variants, and named them ASAF-$w$ and ASAF-1, respectively.
+    \begin{remark}
+		ASAF uses the full-length trajectory, which may be sample-inefficient. The authors also considered using a window size of $w$ or even transition-wise variants, and named them ASAF-$w$ and ASAF-1, respectively.
+	\end{remark}
 \end{frame}
 
 %%%%%%%%%%%%%%%%% Experiments %%%%%%%%%%%%%%%%

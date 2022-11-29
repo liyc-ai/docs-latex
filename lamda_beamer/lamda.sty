@@ -37,7 +37,6 @@
 % \setbeamertemplate{background}{\pgfuseimage{bg}}
 
 % Colors
-% \usecolortheme[RGB={106,0,95}]{structure}
 \usecolortheme[named=lcolor]{structure}
 
 \setbeamercolor{frametitle}{parent=subsection in head/foot}
@@ -138,12 +137,9 @@
 \def\translate#1{#1}%
 }
 
-\setbeamertemplate{theorems}[ams style]  % numbered theorems
-\usefonttheme[onlymath]{serif}
-\setbeamertemplate{caption}[numbered]
-
 % new environment
-\renewenvironment{proof}[1][Proof]{\textit{#1}:~~}{\qed\par}
+\renewenvironment{proof}[1][Proof]{\textit{#1}:~}{\qed\par}
+\newenvironment{remark}{\textbf{Remark}:}{}
 
 % new command
 \newcommand{\myeqref}[1]{Eq.\ \eqref{#1}}
@@ -160,3 +156,22 @@
 % new operator
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+
+\usefonttheme[onlymath]{serif}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{theorems}[ams style]
+
+\setbeamercolor{block title}{fg=white,bg=lcolor}
+\setbeamercolor{block body}{fg=black, bg=lcolor!10!white}
+
+% configure lemma
+\undef{\lemma}
+\newtheorem{lemma}{Lemma}
+\BeforeBeginEnvironment{lemma}{
+    \setbeamercolor{block title}{fg=white,bg=blue!80!white}
+    \setbeamercolor{block body}{fg=black, bg=blue!10!white}
+}
+\AfterEndEnvironment{lemma}{
+    \setbeamercolor{block title}{fg=white,bg=lcolor}
+    \setbeamercolor{block body}{fg=black, bg=lcolor!10!white}
+}
