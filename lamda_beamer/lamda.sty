@@ -33,7 +33,7 @@
 \setbeamertemplate{part page}[default][colsep=-4bp,rounded=true]
 
 % % Background
-% \pgfdeclareimage[width=\paperwidth,height=0.95\paperheight]{bg}{conf_fig/njubackground}
+% \pgfdeclareimage[width=\paperwidth,height=0.95\paperheight]{bg}{conf_fig/bg_nju}
 % \setbeamertemplate{background}{\pgfuseimage{bg}}
 
 % Colors
@@ -74,9 +74,9 @@
 \defbeamertemplate*{headline}{lamda theme}{%
   \leavevmode%
   \@tempdimb=6.4375ex%
-    \pgfdeclareimage[height=.95\@tempdimb]{logo}{conf_fig/njulogo.pdf}%
-    \pgfdeclareimage[height=1.\@tempdimb]{title_logo}{conf_fig/njuname.png}%
-    \pgfdeclareimage[height=1.\@tempdimb]{math_logo}{conf_fig/LAMDA_logo.png}%
+    \pgfdeclareimage[height=.95\@tempdimb]{logo}{conf_fig/logo_nju.pdf}%
+    \pgfdeclareimage[height=1.\@tempdimb]{title_logo}{conf_fig/name_nju.png}%
+    \pgfdeclareimage[height=1.\@tempdimb]{math_logo}{conf_fig/logo_LAMDA.png}%
   \logo{\pgfuseimage{logo}}%
   \ifdim\@tempdimb>0pt%
     \advance\@tempdimb by 1.125ex%
@@ -84,8 +84,6 @@
       \vbox to\@tempdimb{\vfil\pgfuseimage{math_logo}\vfil}%
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=.65\paperwidth,ht=\@tempdimb]{subsection in head/foot}%
-      % \vbox to\@tempdimb{\vfil\insertsectionnavigationhorizontal{.5\textwidth}{\hskip0pt
-      % plus1filll}{}\vfil}
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=.135\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
       \vbox to\@tempdimb{\vfil\pgfuseimage{title_logo}\vfil}%
@@ -132,6 +130,46 @@
     \hskip-\Gm@rmargin%
   }%
 }
+
+\makeatletter
+\newif\ifbeamer@patch@noheadline
+
+\def\beamer@patch@TEXT@headline{headline}
+
+% \beamer@patch@if@headline@off{<beamer template>}{<true>}{<false>}
+% if <beamer template> == "headline" and \ifbeamer@patch@noheadline is True,
+% use <true>, otherwise use <false>
+\def\beamer@patch@if@headline@off#1{%
+  \def\@tempa{#1}%
+  \expanded{\ifx\@tempa\beamer@patch@TEXT@headline
+    \ifbeamer@patch@noheadline
+      \noexpand\@firstoftwo
+    \else
+      \noexpand\@secondoftwo
+    \fi
+  \else
+    \noexpand\@secondoftwo
+  \fi}%
+}
+
+\patchcmd\beamer@typesetheadorfoot
+  {\usebeamertemplate***{#1}}
+  {%
+    \beamer@patch@if@headline@off{#1}
+      {\vskip2pt\relax}
+      {\usebeamertemplate***{#1}}%
+  }{}{\PatchFailed}
+
+\newcommand\mybeamerNoHeadline{%
+  \beamer@patch@noheadlinetrue
+  \beamer@calculateheadfoot
+}
+
+\newcommand\mybeamerRestoreHeadline{%
+  \beamer@patch@noheadlinefalse
+  \beamer@calculateheadfoot
+}
+\makeatother
 
 \pdfstringdefDisableCommands{%
 \def\translate#1{#1}%
