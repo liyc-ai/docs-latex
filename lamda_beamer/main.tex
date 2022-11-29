@@ -13,9 +13,8 @@
 \usepackage{setspace}
 \usepackage{natbib}
 \usepackage{enumerate}
-\usepackage{algorithm}
-\usepackage{algorithmic}
 \usepackage{physics}
+\usepackage[linesnumbered,ruled,lined,boxed]{algorithm2e}
 
 
 \title{Adversarial Soft Advantage Fitting: \\ Imitation Learning without Policy Optimization}
@@ -187,17 +186,18 @@
 	From Theorem \ref{thm:asaf}, we find that optimizing the inner $\tilde{\pi}$ will give us the optimal outer $\pi_G$. We thus get ASAF, a new imitation learning algorithm with pseudocode shown in Algorithm \ref{algo:asaf}.
 
 	\begin{algorithm}[H]
+		% \KwOut{output result}
+		% \KwResult{Write here the result }
 		\caption{ASAF}
 		\label{algo:asaf}
-		\begin{algorithmic}
-			\REQUIRE expert trajectories $\mathcal{D}_E = \{\tau_i^{(E)}\}_{i=1}^{N_E}$
-			\STATE randomly initialize $\tilde{\pi}$ and set $\pi_G \gets \tilde{\pi}$
-			\FOR{steps $m=0$ to $M$}
-			\STATE Collect trajectories $\mathcal{D}_G = \{\tau_i^{(G)}\}^{N_G}_{i=1}$ using $\pi_G$
-			\STATE Update $\tilde{\pi}$ by minimizing \myeqref{equ:2}
-			\STATE $\pi_G \gets \tilde{\pi}$
-			\ENDFOR
-		\end{algorithmic}
+		\KwIn{expert trajectories $\mathcal{D}_E = \{\tau_i^{(E)}\}_{i=1}^{N_E}$}
+			randomly initialize $\tilde{\pi}$ and set $\pi_G \gets \tilde{\pi}$\;
+			\For{steps $m=0$ to $M$}{
+				Collect trajectories $\mathcal{D}_G = \{\tau_i^{(G)}\}^{N_G}_{i=1}$ using $\pi_G$ \;
+				\tcp{ASAF Update}
+				Update $\tilde{\pi}$ by minimizing \myeqref{equ:2} \;
+			 	$\pi_G \gets \tilde{\pi}$
+			}
 	\end{algorithm}
 
 	\begin{equation}\label{equ:2}
