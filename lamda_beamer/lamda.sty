@@ -213,3 +213,15 @@
     \setbeamercolor{block title}{fg=white,bg=brown}
     \setbeamercolor{block body}{fg=black, bg=brown!10!white}
 }
+
+\undef{\definition}
+\newtheorem{definition}{Definition}
+\BeforeBeginEnvironment{definition}{
+    \setbeamercolor{block title}{fg=white,bg=gray!80!white}
+    \setbeamercolor{block body}{fg=black, bg=gray!10!white}
+}
+
+\AfterEndEnvironment{definition}{
+    \setbeamercolor{block title}{fg=white,bg=brown}
+    \setbeamercolor{block body}{fg=black, bg=brown!10!white}
+}
